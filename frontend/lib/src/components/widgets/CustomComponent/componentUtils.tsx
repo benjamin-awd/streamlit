@@ -55,7 +55,7 @@ export type IframeMessage =
   | FrameHeightMessage
 
 export interface IframeMessageHandlerProps {
-  isReady: () => boolean
+  isReady: boolean
   element: ComponentInstanceProto
   widgetMgr: WidgetStateManager
   setComponentError: (error: Error) => void
@@ -101,7 +101,7 @@ export function createIframeMessageHandler(
     //  newest version whenever the callback is called without the need
     //  to register the callback to the outside
     const {
-      isReady: readyCheck,
+      isReady,
       element,
       widgetMgr,
       setComponentError,
@@ -109,7 +109,6 @@ export function createIframeMessageHandler(
       frameHeightCallback,
       fragmentId,
     } = callbacks.current
-    const isReady = readyCheck()
 
     switch (type) {
       case ComponentMessageType.COMPONENT_READY: {
